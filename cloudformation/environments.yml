@@ -1,0 +1,45 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: Explode
+
+Parameters:
+  ProjectName:
+    Type: String
+
+Mappings:
+  EnvironmentMap:
+    Dev:
+      Suffix: "dev"
+      InstanceType: "t3.micro"
+      MinInstances: 1
+    Staging:
+      Suffix: "staging"
+      InstanceType: "t3.small"
+      MinInstances: 2
+
+Resources:
+  InstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles:
+        - "aws-elasticbeanstalk-ec2-role"
+
+  Environment:
+    Type: AWS::ElasticBeanstalk::Environment
+    ExplodeMap: EnvironmentMap
+    Properties:
+      ApplicationName: logging-service
+      Description: "Environment created by CloudFormation"
+      EnvironmentName: !Join [ "-", [ !Ref ProjectName, "!Explode Suffix" ] ]
+      SolutionStackName: "64bit Amazon Linux 2 v3.1.3 running Corretto 8"
+      OptionSettings:
+        - Namespace: 'aws:autoscaling:launchconfiguration'
+          OptionName: IamInstanceProfile
+          Value: !Ref InstanceProfile
+        - Namespace: 'aws:autoscaling:launchconfiguration'
+          OptionName: InstanceType
+          Value: "!Explode InstanceType"
+        - Namespace: 'aws:autoscaling:asg'
+          OptionName: MinSize
+          Value: "!Explode MinInstances"
+
+
