@@ -6,6 +6,7 @@ if [ -z "$1" ]; then
   exit 0
 fi
 
+# change the project_name to your needs
 project_name="tweleve-factor-app-001"
 stack_name="$project_name-$1-stack"
 
