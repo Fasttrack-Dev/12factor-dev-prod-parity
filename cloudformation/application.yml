@@ -1,0 +1,12 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  ApplicationName:
+    Type: String
+
+Resources:
+  DemoApplication:
+    Type: AWS::ElasticBeanstalk::Application
+    Properties:
+      ApplicationName: !Ref ApplicationName
+      Description: Demo application for dev/prod parity factor
