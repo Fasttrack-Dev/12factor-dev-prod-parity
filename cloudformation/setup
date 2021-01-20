@@ -1,25 +1,28 @@
 #!/usr/bin/env bash
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 if [ -z "$1" ]; then
   echo "Provide environment type as parameter: dev / staging / prod"
   exit 0
 fi
 
-project_name="mk999"
+# Change the project_name to your needs
+# Don't forget to change the project_name in the destroy script, too.
+project_name="tweleve-factor-app-001"
 stack_name="$project_name-$1-stack"
 application_name="$project_name-devprodparity"
 
 echo "Providing application if needed..."
 aws cloudformation deploy \
   --stack-name "$project_name-application-stack" \
-  --template-file application.yml \
+  --template-file ${DIR}/application.yml \
   --parameter-overrides \
       ApplicationName="$application_name"
 
 echo "Building $stack_name..."
 aws cloudformation deploy \
   --stack-name "$stack_name" \
-  --template-file environments.yml \
+  --template-file ${DIR}/environments.yml \
   --capabilities CAPABILITY_IAM \
   --parameter-overrides \
       ProjectName="$project_name" \
