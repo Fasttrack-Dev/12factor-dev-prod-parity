@@ -22,8 +22,8 @@ Valid arguments again are `dev`, `staging` and `prod`.
 The script will ask you if you want to remove the
 application as well.
 
-### hints
-verfiy that you are connetc to the correct aws account (Prod or Dev)
+### Hints
+Verify that you are connected to the correct aws account (Prod or Dev)
 ```sh
 $ aws sts get-caller-identity
 ```
