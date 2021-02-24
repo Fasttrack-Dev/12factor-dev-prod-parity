@@ -21,7 +21,7 @@ $ cloudformation/destroy <environment>
 Valid arguments again are `dev`, `staging` and `prod`.
 The script will ask you if you want to remove the
 application as well. If you wish you can modify the project name in
-the ```setup```` script.
+the ```setup``` script.
 
 ### Hints
 Verify that you are connected to the correct aws account (Prod or Dev)
