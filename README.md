@@ -20,7 +20,8 @@ $ cloudformation/destroy <environment>
 ```
 Valid arguments again are `dev`, `staging` and `prod`.
 The script will ask you if you want to remove the
-application as well.
+application as well. If you wish you can modify the project name in
+the ```setup```` script.
 
 ### Hints
 Verify that you are connected to the correct aws account (Prod or Dev)
@@ -29,5 +30,5 @@ $ aws sts get-caller-identity
 ```
 monitor the cloud formation script
 ```sh
-$ aws cloudformation describe-stack-events --stack-name mk999t-prod-stack
+$ aws cloudformation describe-stack-events --stack-name myproject-prod-stack
 ```
